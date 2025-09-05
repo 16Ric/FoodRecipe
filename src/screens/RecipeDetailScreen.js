@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux"; // Redux hooks
 import { toggleFavorite } from "../redux/favoritesSlice"; // Redux action
 
 export default function RecipeDetailScreen(props) {
-  const recipe = props.route.params; // recipe passed from previous screen
+  const { recipe } = props.route.params; 
 
   const dispatch = useDispatch();
   const favoriterecipes = useSelector(
@@ -57,7 +57,9 @@ export default function RecipeDetailScreen(props) {
             },
           ]}
         >
-          <Text>{isFavourite ? "♥" : "♡"}</Text>
+          <Text style={{ color: isFavourite ? "red" : "black" }}>
+            {isFavourite ? "♥" : "♡"}
+          </Text>
         </TouchableOpacity>
       </View>
 
@@ -78,16 +80,16 @@ export default function RecipeDetailScreen(props) {
           </View>
           <View style={styles.miscContainer} testID="miscContainer">
             <View style={styles.miscItem}>
-              <Text style={styles.miscText}>⏱ {recipe.recipeTime} mins</Text>
+              <Text style={styles.miscText}>⏱ {recipe.recipeTime || "30"} mins</Text>
             </View>
             <View style={styles.miscItem}>
-              <Text style={styles.miscText}>🍽 {recipe.recipeServings}</Text>
+              <Text style={styles.miscText}>🍽 {recipe.recipeServings || "02 Servings"}</Text>
             </View>
             <View style={styles.miscItem}>
-              <Text style={styles.miscText}>🔥 {recipe.recipeCalories}</Text>
+              <Text style={styles.miscText}>🔥 {recipe.recipeCalories || "200 Calories"}</Text>
             </View>
             <View style={styles.miscItem}>
-              <Text style={styles.miscText}>{recipe.recipeType}</Text>
+              <Text style={styles.miscText}>{recipe.recipeType || "Medium"}</Text>
             </View>
       </View>
 
